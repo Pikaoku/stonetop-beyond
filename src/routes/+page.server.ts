@@ -1,8 +1,10 @@
-import { supabase } from '$lib/supabaseClient';
+import type { PageServerLoad } from './(public)/$types';
 
-export async function load() {
-	const { data } = await supabase.from('countries').select();
-	return {
-		countries: data ?? []
-	};
-}
+export const load: PageServerLoad = async ({ locals: { supabase } }) => {
+	const { data: countries } = await supabase
+		.from('countries')
+		.select('name')
+		.limit(5)
+		.order('name');
+	return { countries: countries ?? [] };
+};

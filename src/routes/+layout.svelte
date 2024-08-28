@@ -1,22 +1,29 @@
 <script>
-	import Header from './Header.svelte';
 	import '../app.css';
+	import { invalidate } from '$app/navigation';
+	import { onMount } from 'svelte';
+	export let data;
+	$: ({ session, supabase } = data);
+
+	onMount(() => {
+		const { data } = supabase.auth.onAuthStateChange((_, newSession) => {
+			if (newSession?.expires_at !== session?.expires_at) {
+				invalidate('supabase:auth');
+			}
+		});
+
+		return () => data.subscription.unsubscribe();
+	});
 </script>
 
-<div class="app">
-	<Header />
-
-	<main>
-		<slot />
-	</main>
-
-	<footer>
-		<p>visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to learn SvelteKit</p>
-	</footer>
+<div class="flex flex-col h-screen">
+	<slot />
 </div>
 
 <style lang="postcss">
 	:global(html) {
-		background-color: theme(colors.gray.100);
+		background-color: theme(colors.black.off);
+		color: theme(colors.white.off);
+		@apply font-body text-lg;
 	}
 </style>
