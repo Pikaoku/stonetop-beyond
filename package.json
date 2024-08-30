@@ -41,7 +41,10 @@
 	"dependencies": {
 		"@supabase/ssr": "^0.5.1",
 		"@supabase/supabase-js": "^2.45.2",
+		"carta-md": "^4.4.5",
 		"classnames": "^2.5.1",
+		"lucide-svelte": "^0.436.0",
+		"svelte-markdown": "^0.4.1",
 		"vercel": "^37.2.1"
 	}
 }
