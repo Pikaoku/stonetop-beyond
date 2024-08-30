@@ -69,18 +69,21 @@ export type Database = {
           created_at: string
           description: string
           id: number
+          instincts: Json[]
           name: string
         }
         Insert: {
           created_at?: string
           description?: string
           id?: number
+          instincts?: Json[]
           name?: string
         }
         Update: {
           created_at?: string
           description?: string
           id?: number
+          instincts?: Json[]
           name?: string
         }
         Relationships: []
