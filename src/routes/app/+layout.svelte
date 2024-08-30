@@ -10,9 +10,9 @@
 	};
 </script>
 
-<div class="p-3 flex flex-col gap-2">
-	<div class="font-display text-4xl tracking-wider">Stonetop Beyond</div>
-	<main>
+<div class="p-3 flex flex-col gap-2 h-full">
+	<div class="font-display text-2xl tracking-wider">Stonetop Characters</div>
+	<main class="h-full">
 		<slot />
 	</main>
 </div>
