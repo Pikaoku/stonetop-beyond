@@ -1,8 +1,6 @@
 <script lang="ts">
 	import { Carta, Markdown } from 'carta-md';
 
-	import RoughLink from '$lib/components/RoughLink.svelte';
-	import MoveSelector from '$lib/components/character-creation/MoveSelector.svelte';
 	import ClassSelector from './ClassSelector.svelte';
 	const carta = new Carta();
 	export let data;
@@ -39,14 +37,14 @@
 		{/each}
 	</div>
 	{#if newCharacter.class}
-		<div class="bg-black-off mt-2 sticky bottom-0 my-2 py-2">
-			<button
+		<button class=" mt-2 sticky bottom-0 my-2 py-2">
+			<div
 				class="rough-button bg-white-off text-black w-full"
 				on:click={() => (step = 'background')}
 			>
 				Confirm
-			</button>
-		</div>
+			</div>
+		</button>
 	{/if}
 {:else if step === 'background'}
 	Choose a background for your class.

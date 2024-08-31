@@ -1,0 +1,106 @@
+<script lang="ts">
+	import type { Tables } from '../../../../../../database.types';
+	import { Square, CheckSquare } from 'lucide-svelte';
+	import StatSquare from './StatSquare.svelte';
+	import RoughLink from '$lib/components/RoughLink.svelte';
+	import SvelteMarkdown from 'svelte-markdown';
+	import RoughButton from '$lib/components/RoughButton.svelte';
+	export let data;
+	const character = data.character;
+
+	const getAttributeValue = (atr: keyof Tables<'stat_line'>) => {
+		try {
+			return (character?.moves ?? []).reduce(
+				(acc, move) => (!move.stats ? acc : acc + Number(move?.stats?.[atr])),
+				0
+			);
+		} catch (e) {
+			return 0;
+		}
+	};
+
+	const topLineAtrs = ['strength', 'intelligence', 'constitution'] as const;
+	const bottomLineAtrs = ['dexterity', 'wisdom', 'charisma'] as const;
+
+	$: console.log('character', character);
+
+	$: classMoves = (
+		character?.moves?.filter((move) => !!move && move.move?.type === 'class') ?? []
+	).map((move) => move.move) as Tables<'move'>[];
+</script>
+
+{#if character}
+	<div class="flex flex-col w-full gap-3 h-full p-2">
+		<div class="flex flex-row justify-between">
+			<h3 class="text-xl">{character.name}</h3>
+			<div>Lvl. 7</div>
+		</div>
+		<div>
+			<p class="text-sm italic">eager youth, calm voice, hard body, polished gear</p>
+			<p>character.description if i had one</p>
+			<div class="leading-tight">
+				<p>Instinct: Ambition, To increase your status or influence.</p>
+			</div>
+		</div>
+		<hr class="" />
+		<div class="flex flex-col -mb-3">
+			<div class="grid grid-cols-3 gap-2">
+				{#each topLineAtrs as atr}
+					<StatSquare value={getAttributeValue(atr)} label={atr.slice(0, 3)} />
+				{/each}
+			</div>
+			<div class="grid grid-cols-3 gap-2 mt-3">
+				{#each bottomLineAtrs as atr}
+					<StatSquare value={getAttributeValue(atr)} label={atr.slice(0, 3)} labelPosition="top" />
+				{/each}
+			</div>
+			<div class="grid -mt-5 -mb-1 grid-cols-3 gap-2 text-center capitalize text-sm pt-3 pb-3">
+				{#each ['weakened', 'dazed', 'miserable'] as atr}
+					<div
+						class="flex flex-row gap-1 justify-center border-2 border-t-0 rounded-b-lg pt-3 pb-1"
+					>
+						<div class="my-auto">{atr}</div>
+						{#if atr === 'dazed'}
+							<CheckSquare size="16" class="text-red-500 my-auto" />
+						{:else}
+							<Square size="16" class="my-auto" />
+						{/if}
+					</div>
+				{/each}
+			</div>
+		</div>
+		<div class="grid grid-cols-3 gap-2">
+			<StatSquare value={0} label="hp" />
+			<StatSquare value={0} label="armor" />
+			<StatSquare value={0} label="xp" />
+		</div>
+		<hr />
+		<div class="flex flex-row gap-4 my-2 text-center">
+			<RoughLink href="/app/characters/{character.id}/edit" class="btn btn-primary w-full"
+				>Basic moves</RoughLink
+			>
+			<RoughLink href="/app/characters/{character.id}/edit" class="btn btn-primary w-full"
+				>Manage pack</RoughLink
+			>
+		</div>
+		<h3 class="text-lg underline underline-offset-8">Class moves</h3>
+		<div class="flex flex-col divide-y-2 divide-white-off/50">
+			{#each classMoves as move}
+				<div class="flex flex-col gap-1 py-2">
+					<div class="font-medium text-xl">{move.name}</div>
+					<div class="markdown-container leading-tight">
+						<SvelteMarkdown source={move.body} />
+					</div>
+				</div>
+			{/each}
+		</div>
+		<RoughButton>Expedition moves</RoughButton>
+		<RoughButton>Homefront moves</RoughButton>
+		<div class="min-w-full py-8" />
+	</div>
+{:else}
+	<div class="flex flex-col w-full gap-4 h-full">
+		<h3 class="text-xl">Character not found</h3>
+		<p>It seems that the character you're looking for doesn't exist.</p>
+	</div>
+{/if}

@@ -10,7 +10,7 @@
 	<h3 class="text-xl">Your characters</h3>
 	<ul>
 		{#each characters as character (character.id)}
-			<li>{character.name}</li>
+			<li><a href={`/app/characters/${character.id}`}> {character.name}</a></li>
 		{:else}
 			<li>No characters yet!</li>
 		{/each}

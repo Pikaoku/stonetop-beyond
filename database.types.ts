@@ -64,6 +64,49 @@ export type Database = {
           },
         ]
       }
+      character_move: {
+        Row: {
+          character_id: number
+          id: number
+          move_id: number
+          stat_line_id: number | null
+        }
+        Insert: {
+          character_id: number
+          id?: number
+          move_id: number
+          stat_line_id?: number | null
+        }
+        Update: {
+          character_id?: number
+          id?: number
+          move_id?: number
+          stat_line_id?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "character_move_character_id_fkey"
+            columns: ["character_id"]
+            isOneToOne: false
+            referencedRelation: "character"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "character_move_move_id_fkey"
+            columns: ["move_id"]
+            isOneToOne: false
+            referencedRelation: "move"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "character_move_stat_line_id_fkey"
+            columns: ["stat_line_id"]
+            isOneToOne: false
+            referencedRelation: "stat_line"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       class: {
         Row: {
           created_at: string
@@ -87,6 +130,44 @@ export type Database = {
           name?: string
         }
         Relationships: []
+      }
+      move: {
+        Row: {
+          body: string
+          class_id: number | null
+          created_at: string
+          id: number
+          level_requirement: number
+          name: string
+          type: string
+        }
+        Insert: {
+          body?: string
+          class_id?: number | null
+          created_at?: string
+          id?: number
+          level_requirement?: number
+          name?: string
+          type?: string
+        }
+        Update: {
+          body?: string
+          class_id?: number | null
+          created_at?: string
+          id?: number
+          level_requirement?: number
+          name?: string
+          type?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "move_class_id_fkey"
+            columns: ["class_id"]
+            isOneToOne: false
+            referencedRelation: "class"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       profile: {
         Row: {
@@ -119,6 +200,54 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      stat_line: {
+        Row: {
+          armor: number
+          charisma: number
+          constitution: number
+          created_at: string
+          damage_dice: number
+          damage_modified: number
+          dexterity: number
+          id: number
+          intelligence: number
+          label: string
+          max_hp: number
+          strength: number
+          wisdom: number
+        }
+        Insert: {
+          armor?: number
+          charisma?: number
+          constitution?: number
+          created_at?: string
+          damage_dice?: number
+          damage_modified?: number
+          dexterity?: number
+          id?: number
+          intelligence?: number
+          label?: string
+          max_hp?: number
+          strength?: number
+          wisdom?: number
+        }
+        Update: {
+          armor?: number
+          charisma?: number
+          constitution?: number
+          created_at?: string
+          damage_dice?: number
+          damage_modified?: number
+          dexterity?: number
+          id?: number
+          intelligence?: number
+          label?: string
+          max_hp?: number
+          strength?: number
+          wisdom?: number
+        }
+        Relationships: []
       }
     }
     Views: {
