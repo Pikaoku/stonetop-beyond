@@ -15,7 +15,7 @@
 <button
 	on:click
 	class={cx(
-		'flex flex-col rounded-lg overflow-hidden gap-3 border',
+		'flex flex-col rounded-lg overflow-hidden gap-4 border',
 		debilitated ? 'border-red-500 text-red-500' : 'border-white-off'
 	)}
 >
@@ -25,7 +25,7 @@
 		label={bottomLabel.slice(0, 3)}
 		labelPosition="top"
 	/>
-	<div class="flex flex-row gap-1 justify-center pb-1 -mt-2 mx-auto">
+	<div class="flex flex-row gap-1 justify-center pb-1 -mt-3 mx-auto">
 		<div class="my-auto">{debility}</div>
 		{#if debilitated}
 			<CheckSquare size="16" class="text-red-500 my-auto" />

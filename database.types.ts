@@ -185,6 +185,41 @@ export type Database = {
           },
         ]
       }
+      pool: {
+        Row: {
+          character_id: number
+          id: number
+          label: string
+          max: number
+          type: string
+          value: number
+        }
+        Insert: {
+          character_id: number
+          id?: number
+          label?: string
+          max?: number
+          type?: string
+          value?: number
+        }
+        Update: {
+          character_id?: number
+          id?: number
+          label?: string
+          max?: number
+          type?: string
+          value?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "pool_character_id_fkey"
+            columns: ["character_id"]
+            isOneToOne: false
+            referencedRelation: "character"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       profile: {
         Row: {
           created_at: string

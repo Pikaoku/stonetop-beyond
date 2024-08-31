@@ -5,6 +5,7 @@
 	import SvelteMarkdown from 'svelte-markdown';
 	import RoughButton from '$lib/components/RoughButton.svelte';
 	import StatPair from './StatPair.svelte';
+	import { getAttributeValue, getPoolValue } from '$lib/helps/character';
 	export let data;
 	const character = data.character;
 
@@ -28,17 +29,6 @@
 
 	$: console.log('character', character);
 
-	const getAttributeValue = (atr: keyof Tables<'stat_line'>) => {
-		try {
-			return (character?.moves ?? []).reduce(
-				(acc, move) => (!move.stats ? acc : acc + Number(move?.stats?.[atr])),
-				0
-			);
-		} catch (e) {
-			return 0;
-		}
-	};
-
 	$: classMoves = (
 		character?.moves?.filter((move) => !!move && move.move?.type === 'class') ?? []
 	).map((move) => move.move) as Tables<'move'>[];
@@ -59,36 +49,38 @@
 		<div class="grid grid-cols-3 gap-3 border-white-off">
 			<StatPair
 				topLabel="strength"
-				topValue={getAttributeValue('strength')}
+				topValue={getAttributeValue(character, 'strength')}
 				bottomLabel="dexterity"
-				bottomValue={getAttributeValue('dexterity')}
+				bottomValue={getAttributeValue(character, 'dexterity')}
 				debility="weakened"
 				debilitated={weakened}
 				on:click={() => setDebility('weakened')}
 			/>
 			<StatPair
 				topLabel="intelligence"
-				topValue={getAttributeValue('intelligence')}
+				topValue={getAttributeValue(character, 'intelligence')}
 				bottomLabel="wisdom"
-				bottomValue={getAttributeValue('wisdom')}
+				bottomValue={getAttributeValue(character, 'wisdom')}
 				debility="dazed"
 				debilitated={dazed}
 				on:click={() => setDebility('dazed')}
 			/>
 			<StatPair
 				topLabel="constitution"
-				topValue={getAttributeValue('constitution')}
+				topValue={getAttributeValue(character, 'constitution')}
 				bottomLabel="charisma"
-				bottomValue={getAttributeValue('charisma')}
+				bottomValue={getAttributeValue(character, 'charisma')}
 				debility="miserable"
 				debilitated={miserable}
 				on:click={() => setDebility('miserable')}
 			/>
 		</div>
 		<div class="grid grid-cols-3 gap-2">
-			<StatSquare value={0} label="hp" />
-			<StatSquare value={0} label="armor" />
-			<StatSquare value={0} label="xp" />
+			<a href={`/app/characters/${character.id}/hp`}>
+				<StatSquare value={getPoolValue(character, 'hp')} label="hp" />
+			</a>
+			<StatSquare value={getAttributeValue(character, 'armor')} label="armor" />
+			<StatSquare value={getPoolValue(character, 'xp')} label="xp" />
 		</div>
 		<hr />
 		<div class="flex flex-row gap-4 my-2 text-center">
