@@ -37,24 +37,40 @@ export type Database = {
       }
       character: {
         Row: {
+          appearance: string
+          class_id: number
           created_at: string
           id: number
+          instinct: string
           name: string
           owner_id: string | null
         }
         Insert: {
+          appearance?: string
+          class_id: number
           created_at?: string
           id?: number
+          instinct?: string
           name?: string
           owner_id?: string | null
         }
         Update: {
+          appearance?: string
+          class_id?: number
           created_at?: string
           id?: number
+          instinct?: string
           name?: string
           owner_id?: string | null
         }
         Relationships: [
+          {
+            foreignKeyName: "character_class_id_fkey"
+            columns: ["class_id"]
+            isOneToOne: false
+            referencedRelation: "class"
+            referencedColumns: ["id"]
+          },
           {
             foreignKeyName: "character_owner_id_fkey"
             columns: ["owner_id"]
@@ -139,7 +155,7 @@ export type Database = {
           id: number
           level_requirement: number
           name: string
-          type: string
+          type: Database["public"]["Enums"]["move_types"]
         }
         Insert: {
           body?: string
@@ -148,7 +164,7 @@ export type Database = {
           id?: number
           level_requirement?: number
           name?: string
-          type?: string
+          type?: Database["public"]["Enums"]["move_types"]
         }
         Update: {
           body?: string
@@ -157,7 +173,7 @@ export type Database = {
           id?: number
           level_requirement?: number
           name?: string
-          type?: string
+          type?: Database["public"]["Enums"]["move_types"]
         }
         Relationships: [
           {
@@ -260,7 +276,13 @@ export type Database = {
       }
     }
     Enums: {
-      [_ in never]: never
+      move_types:
+        | "basic"
+        | "value"
+        | "system"
+        | "homefront"
+        | "expedition"
+        | "class"
     }
     CompositeTypes: {
       [_ in never]: never

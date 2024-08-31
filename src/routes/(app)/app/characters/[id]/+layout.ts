@@ -15,7 +15,9 @@ export const load: LayoutLoad = async ({ parent, params }) => {
 	const character = (
 		await supabase
 			.from('character')
-			.select('*, moves:character_move (*, move:move (*), stats:stat_line (*))')
+			.select(
+				'*, moves:character_move (*, move:move (*), stats:stat_line (*)), class (id, name, description)'
+			)
 			.eq('id', characterId)
 			.single()
 	).data;
