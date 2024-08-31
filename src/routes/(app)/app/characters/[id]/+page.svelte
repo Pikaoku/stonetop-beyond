@@ -1,12 +1,30 @@
 <script lang="ts">
 	import type { Tables } from '../../../../../../database.types';
-	import { Square, CheckSquare } from 'lucide-svelte';
 	import StatSquare from './StatSquare.svelte';
 	import RoughLink from '$lib/components/RoughLink.svelte';
 	import SvelteMarkdown from 'svelte-markdown';
 	import RoughButton from '$lib/components/RoughButton.svelte';
+	import StatPair from './StatPair.svelte';
 	export let data;
 	const character = data.character;
+
+	let dazed = false;
+	let weakened = false;
+	let miserable = false;
+
+	const setDebility = (debility: string) => {
+		switch (debility) {
+			case 'dazed':
+				dazed = !dazed;
+				break;
+			case 'weakened':
+				weakened = !weakened;
+				break;
+			case 'miserable':
+				miserable = !miserable;
+				break;
+		}
+	};
 
 	const getAttributeValue = (atr: keyof Tables<'stat_line'>) => {
 		try {
@@ -18,11 +36,6 @@
 			return 0;
 		}
 	};
-
-	const topLineAtrs = ['strength', 'intelligence', 'constitution'] as const;
-	const bottomLineAtrs = ['dexterity', 'wisdom', 'charisma'] as const;
-
-	$: console.log('character', character);
 
 	$: classMoves = (
 		character?.moves?.filter((move) => !!move && move.move?.type === 'class') ?? []
@@ -43,7 +56,36 @@
 			</div>
 		</div>
 		<hr class="" />
-		<div class="flex flex-col -mb-3">
+		<div class="grid grid-cols-3 gap-3 border-white-off">
+			<StatPair
+				topLabel="strength"
+				topValue={getAttributeValue('strength')}
+				bottomLabel="dexterity"
+				bottomValue={getAttributeValue('dexterity')}
+				debility="weakened"
+				debilitated={weakened}
+				on:click={() => setDebility('weakened')}
+			/>
+			<StatPair
+				topLabel="intelligence"
+				topValue={getAttributeValue('intelligence')}
+				bottomLabel="wisdom"
+				bottomValue={getAttributeValue('wisdom')}
+				debility="dazed"
+				debilitated={dazed}
+				on:click={() => setDebility('dazed')}
+			/>
+			<StatPair
+				topLabel="constitution"
+				topValue={getAttributeValue('constitution')}
+				bottomLabel="charisma"
+				bottomValue={getAttributeValue('charisma')}
+				debility="miserable"
+				debilitated={miserable}
+				on:click={() => setDebility('miserable')}
+			/>
+		</div>
+		<!-- <div class="flex flex-col -mb-3">
 			<div class="grid grid-cols-3 gap-2">
 				{#each topLineAtrs as atr}
 					<StatSquare value={getAttributeValue(atr)} label={atr.slice(0, 3)} />
@@ -68,7 +110,7 @@
 					</div>
 				{/each}
 			</div>
-		</div>
+		</div> -->
 		<div class="grid grid-cols-3 gap-2">
 			<StatSquare value={0} label="hp" />
 			<StatSquare value={0} label="armor" />
