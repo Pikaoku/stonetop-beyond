@@ -120,7 +120,7 @@
 }
 
 .markdown-container {
-	@apply flex flex-col gap-1;
+	@apply flex flex-col gap-1 leading-snug;
 }
 .markdown-container > ul {
 	list-style-position: outside;

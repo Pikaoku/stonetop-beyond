@@ -85,32 +85,6 @@
 				on:click={() => setDebility('miserable')}
 			/>
 		</div>
-		<!-- <div class="flex flex-col -mb-3">
-			<div class="grid grid-cols-3 gap-2">
-				{#each topLineAtrs as atr}
-					<StatSquare value={getAttributeValue(atr)} label={atr.slice(0, 3)} />
-				{/each}
-			</div>
-			<div class="grid grid-cols-3 gap-2 mt-3">
-				{#each bottomLineAtrs as atr}
-					<StatSquare value={getAttributeValue(atr)} label={atr.slice(0, 3)} labelPosition="top" />
-				{/each}
-			</div>
-			<div class="grid -mt-5 -mb-1 grid-cols-3 gap-2 text-center capitalize text-sm pt-3 pb-3">
-				{#each ['weakened', 'dazed', 'miserable'] as atr}
-					<div
-						class="flex flex-row gap-1 justify-center border-2 border-t-0 rounded-b-lg pt-3 pb-1"
-					>
-						<div class="my-auto">{atr}</div>
-						{#if atr === 'dazed'}
-							<CheckSquare size="16" class="text-red-500 my-auto" />
-						{:else}
-							<Square size="16" class="my-auto" />
-						{/if}
-					</div>
-				{/each}
-			</div>
-		</div> -->
 		<div class="grid grid-cols-3 gap-2">
 			<StatSquare value={0} label="hp" />
 			<StatSquare value={0} label="armor" />
@@ -118,7 +92,7 @@
 		</div>
 		<hr />
 		<div class="flex flex-row gap-4 my-2 text-center">
-			<RoughLink href="/app/characters/{character.id}/edit" class="btn btn-primary w-full"
+			<RoughLink href="/app/characters/{character.id}/basic-moves" class="btn btn-primary w-full"
 				>Basic moves</RoughLink
 			>
 			<RoughLink href="/app/characters/{character.id}/edit" class="btn btn-primary w-full"
