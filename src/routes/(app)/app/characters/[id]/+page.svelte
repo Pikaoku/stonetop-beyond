@@ -1,31 +1,14 @@
 <script lang="ts">
-	import type { Tables } from '../../../../../../database.types';
 	import StatSquare from './StatSquare.svelte';
 	import RoughLink from '$lib/components/RoughLink.svelte';
 	import SvelteMarkdown from 'svelte-markdown';
 	import RoughButton from '$lib/components/RoughButton.svelte';
-	import StatPair from './StatPair.svelte';
 	import { getAttributeValue, getPoolValue } from '$lib/helps/character';
+	import AbilityScores from './AbilityScores.svelte';
+	import type { Tables } from '$lib/types/db';
+
 	export let data;
 	const character = data.character;
-
-	let dazed = false;
-	let weakened = false;
-	let miserable = false;
-
-	const setDebility = (debility: string) => {
-		switch (debility) {
-			case 'dazed':
-				dazed = !dazed;
-				break;
-			case 'weakened':
-				weakened = !weakened;
-				break;
-			case 'miserable':
-				miserable = !miserable;
-				break;
-		}
-	};
 
 	$: console.log('character', character);
 
@@ -46,35 +29,7 @@
 			<p class=""><span class="font-semibold">Instinct</span> {character.instinct}</p>
 		</div>
 		<hr class="" />
-		<div class="grid grid-cols-3 gap-3 border-white-off">
-			<StatPair
-				topLabel="strength"
-				topValue={getAttributeValue(character, 'strength')}
-				bottomLabel="dexterity"
-				bottomValue={getAttributeValue(character, 'dexterity')}
-				debility="weakened"
-				debilitated={weakened}
-				on:click={() => setDebility('weakened')}
-			/>
-			<StatPair
-				topLabel="intelligence"
-				topValue={getAttributeValue(character, 'intelligence')}
-				bottomLabel="wisdom"
-				bottomValue={getAttributeValue(character, 'wisdom')}
-				debility="dazed"
-				debilitated={dazed}
-				on:click={() => setDebility('dazed')}
-			/>
-			<StatPair
-				topLabel="constitution"
-				topValue={getAttributeValue(character, 'constitution')}
-				bottomLabel="charisma"
-				bottomValue={getAttributeValue(character, 'charisma')}
-				debility="miserable"
-				debilitated={miserable}
-				on:click={() => setDebility('miserable')}
-			/>
-		</div>
+		<AbilityScores {character} />
 		<div class="grid grid-cols-3 gap-2">
 			<a href={`/app/characters/${character.id}/hp`}>
 				<StatSquare value={getPoolValue(character, 'hp')} label="hp" />

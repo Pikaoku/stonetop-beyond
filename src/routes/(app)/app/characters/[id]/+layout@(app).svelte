@@ -1,3 +1,3 @@
-<div class=" h-full flex flex-col p-4">
+<div class=" h-full flex flex-col p-2">
 	<slot />
 </div>

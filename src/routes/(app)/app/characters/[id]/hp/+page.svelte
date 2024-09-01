@@ -33,7 +33,7 @@
 
 <div class="my-auto flex flex-col">
 	{#if character}
-		<RoughLink href="/app/characters/{character.id}/hp" class="w-full text-center"
+		<RoughLink href="/app/characters/{character.id}" class="w-full text-center"
 			>Back to character</RoughLink
 		>
 		<div class="mx-auto w-20 my-4">
@@ -41,7 +41,8 @@
 		</div>
 		<hr class="my-4" />
 		<div class="flex flex-row text-center">
-			<button on:click={() => (value -= 1)} class="flex-1"><Minus class="text-xl mx-auto" /></button
+			<button on:click={() => (value -= 1)} class="flex-1 touch-manipulation"
+				><Minus class="text-xl mx-auto" /></button
 			>
 			<input
 				type="number"
@@ -49,7 +50,9 @@
 				bind:value
 				class="text-black p-6 rounded-lg mx-auto w-24 text-center text-4xl font-sans"
 			/>
-			<button on:click={() => (value += 1)} class="flex-1"><Plus class="text-xl mx-auto" /></button>
+			<button on:click={() => (value += 1)} class="flex-1 touch-manipulation"
+				><Plus class="text-xl mx-auto" /></button
+			>
 		</div>
 		<div class="flex flex-row justify-between items-center gap-4 mt-4 font-medium">
 			<button on:click={() => handleUpdate(true)} class="p-2 my-2 bg-red-800 rounded uppercase"

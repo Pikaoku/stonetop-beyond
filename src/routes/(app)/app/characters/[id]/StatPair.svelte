@@ -15,8 +15,9 @@
 <button
 	on:click
 	class={cx(
-		'flex flex-col rounded-lg overflow-hidden gap-4 border',
-		debilitated ? 'border-red-500 text-red-500' : 'border-white-off'
+		'flex flex-col rounded-lg overflow-hidden gap-5 border',
+		debilitated ? 'border-red-500 text-red-500' : 'border-white-off',
+		'transition-colors duration-200 ease-in-out'
 	)}
 >
 	<StatSquare value={debilitated ? topValue - 1 : topValue} label={topLabel.slice(0, 3)} />

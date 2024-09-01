@@ -191,7 +191,7 @@ export type Database = {
           id: number
           label: string
           max: number
-          type: string
+          type: Database["public"]["Enums"]["pool_type"]
           value: number
         }
         Insert: {
@@ -199,7 +199,7 @@ export type Database = {
           id?: number
           label?: string
           max?: number
-          type?: string
+          type?: Database["public"]["Enums"]["pool_type"]
           value?: number
         }
         Update: {
@@ -207,7 +207,7 @@ export type Database = {
           id?: number
           label?: string
           max?: number
-          type?: string
+          type?: Database["public"]["Enums"]["pool_type"]
           value?: number
         }
         Relationships: [
@@ -318,6 +318,7 @@ export type Database = {
         | "homefront"
         | "expedition"
         | "class"
+      pool_type: "character" | "move" | "system" | "status" | "other"
     }
     CompositeTypes: {
       [_ in never]: never
