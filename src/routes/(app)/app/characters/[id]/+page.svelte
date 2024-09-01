@@ -8,6 +8,7 @@
 	import type { Tables } from '$lib/types/db';
 	import HpDisplay from './HpDisplay.svelte';
 	import { character as charStore } from './stores';
+	import Backpack from './Backpack.svelte';
 
 	$: character = $charStore;
 	$: classMoves = (
@@ -38,10 +39,7 @@
 			<RoughLink href="/app/characters/{character.id}/basic-moves" class="flex-1"
 				>Basic moves</RoughLink
 			>
-			<!-- <RoughLink href="/app/characters/{character.id}/edit" class="btn btn-primary w-full"
-				>Manage pack</RoughLink
-			> -->
-			<RoughButton class="flex-1">Outfit</RoughButton>
+			<Backpack />
 		</div>
 		<h3 class="text-lg underline underline-offset-8">Class moves</h3>
 		<div class="flex flex-col divide-y-2 divide-white-off/50">

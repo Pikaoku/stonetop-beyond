@@ -147,6 +147,51 @@ export type Database = {
         }
         Relationships: []
       }
+      item: {
+        Row: {
+          affected_by_prosperity: boolean
+          charges: number
+          charges_label: string | null
+          description: string
+          id: number
+          instructions: string
+          name: string
+          official: boolean
+          qualifier: string
+          size: Database["public"]["Enums"]["item_size"]
+          traits: string
+          weight: number
+        }
+        Insert: {
+          affected_by_prosperity?: boolean
+          charges?: number
+          charges_label?: string | null
+          description?: string
+          id?: number
+          instructions?: string
+          name?: string
+          official?: boolean
+          qualifier?: string
+          size?: Database["public"]["Enums"]["item_size"]
+          traits?: string
+          weight?: number
+        }
+        Update: {
+          affected_by_prosperity?: boolean
+          charges?: number
+          charges_label?: string | null
+          description?: string
+          id?: number
+          instructions?: string
+          name?: string
+          official?: boolean
+          qualifier?: string
+          size?: Database["public"]["Enums"]["item_size"]
+          traits?: string
+          weight?: number
+        }
+        Relationships: []
+      }
       move: {
         Row: {
           body: string
@@ -181,6 +226,45 @@ export type Database = {
             columns: ["class_id"]
             isOneToOne: false
             referencedRelation: "class"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      pack_item: {
+        Row: {
+          character_id: number
+          created_at: string
+          id: number
+          item_id: number
+          uses: number
+        }
+        Insert: {
+          character_id: number
+          created_at?: string
+          id?: number
+          item_id: number
+          uses?: number
+        }
+        Update: {
+          character_id?: number
+          created_at?: string
+          id?: number
+          item_id?: number
+          uses?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "pack_item_character_id_fkey"
+            columns: ["character_id"]
+            isOneToOne: false
+            referencedRelation: "character"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "pack_item_item_id_fkey"
+            columns: ["item_id"]
+            isOneToOne: false
+            referencedRelation: "item"
             referencedColumns: ["id"]
           },
         ]
@@ -311,6 +395,7 @@ export type Database = {
       }
     }
     Enums: {
+      item_size: "small" | "normal"
       move_types:
         | "basic"
         | "value"

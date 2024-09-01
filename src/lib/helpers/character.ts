@@ -9,6 +9,9 @@ export type Character = Tables<'character'> & {
 		| null;
 	pools?: Tables<'pool'>[] | null;
 	class?: Partial<Tables<'class'>> | null;
+	pack: (Tables<'pack_item'> & {
+		item: Tables<'item'>;
+	})[];
 };
 
 export function getAttributeValue(character: Character, atr: keyof Tables<'stat_line'>) {

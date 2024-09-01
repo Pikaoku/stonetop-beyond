@@ -23,7 +23,7 @@
 	use:melt={$trigger}
 	class={cx(
 		'cursor-pointer',
-		'transition-all duration-200 ease-in-out active:scale-75',
+		'active:scale-90 transition-all duration-100 ease-in-out',
 		triggerWrapperClasses
 	)}
 >
@@ -41,6 +41,7 @@
 			class="fixed left-1/2 bottom-0 z-50 max-h-[85vh] w-[95vw] mx-auto max-w-[450px] -translate-x-1/2 rounded-t-xl bg-white-off text-black-off p-6 pt-10 shadow-lg"
 			transition:fly={{
 				duration: 500,
+				delay: 100,
 				y: 100
 			}}
 			use:melt={$content}
