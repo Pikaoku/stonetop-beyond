@@ -3,22 +3,17 @@
 	import RoughLink from '$lib/components/RoughLink.svelte';
 	import SvelteMarkdown from 'svelte-markdown';
 	import RoughButton from '$lib/components/RoughButton.svelte';
-	import { getAttributeValue, getPoolValue } from '$lib/helps/character';
+	import { getAttributeValue, getPoolValue } from '$lib/helpers/character';
 	import AbilityScores from './AbilityScores.svelte';
 	import type { Tables } from '$lib/types/db';
-	import Dialog from '$lib/components/ui/Dialog.svelte';
+	import HpDisplay from './HpDisplay.svelte';
+	import { character as charStore } from './stores';
 
-	export let data;
-	const character = data.character;
-
-	$: console.log('character', character);
-
+	$: character = $charStore;
 	$: classMoves = (
 		character?.moves?.filter((move) => !!move && move.move?.type === 'class') ?? []
 	).map((move) => move.move) as Tables<'move'>[];
 </script>
-
-<Dialog />
 
 {#if character}
 	<div class="flex flex-col w-full gap-3 h-full p-2">
@@ -34,9 +29,7 @@
 		<hr class="" />
 		<AbilityScores {character} />
 		<div class="grid grid-cols-3 gap-2">
-			<a href={`/app/characters/${character.id}/hp`}>
-				<StatSquare value={getPoolValue(character, 'hp')} label="hp" />
-			</a>
+			<HpDisplay {character} />
 			<StatSquare value={getAttributeValue(character, 'armor')} label="armor" />
 			<StatSquare value={getPoolValue(character, 'xp')} label="xp" />
 		</div>

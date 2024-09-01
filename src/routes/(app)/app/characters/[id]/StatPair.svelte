@@ -20,11 +20,16 @@
 		'transition-colors duration-200 ease-in-out touch-manipulation'
 	)}
 >
-	<StatSquare value={debilitated ? topValue - 1 : topValue} label={topLabel.slice(0, 3)} />
+	<StatSquare
+		value={debilitated ? topValue - 1 : topValue}
+		label={topLabel.slice(0, 3)}
+		style={debilitated ? 'red' : 'white'}
+	/>
 	<StatSquare
 		value={debilitated ? bottomValue - 1 : bottomValue}
 		label={bottomLabel.slice(0, 3)}
 		labelPosition="top"
+		style={debilitated ? 'red' : 'white'}
 	/>
 	<div class="flex flex-row gap-1 justify-center pb-1 -mt-3 mx-auto">
 		<div class="my-auto">{debility}</div>

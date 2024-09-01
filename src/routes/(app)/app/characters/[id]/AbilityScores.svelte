@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { getAttributeValue, type Character } from '$lib/helps/character';
+	import { getAttributeValue, type Character } from '$lib/helpers/character';
 	import { onMount } from 'svelte';
 	import StatPair from './StatPair.svelte';
 	import { page } from '$app/stores';
