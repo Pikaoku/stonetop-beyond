@@ -6,6 +6,7 @@
 	import { getAttributeValue, getPoolValue } from '$lib/helps/character';
 	import AbilityScores from './AbilityScores.svelte';
 	import type { Tables } from '$lib/types/db';
+	import Dialog from '$lib/components/ui/Dialog.svelte';
 
 	export let data;
 	const character = data.character;
@@ -16,6 +17,8 @@
 		character?.moves?.filter((move) => !!move && move.move?.type === 'class') ?? []
 	).map((move) => move.move) as Tables<'move'>[];
 </script>
+
+<Dialog />
 
 {#if character}
 	<div class="flex flex-col w-full gap-3 h-full p-2">
