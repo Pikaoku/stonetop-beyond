@@ -42,3 +42,15 @@ You can preview the production build with `npm run preview`.
 ```bash
 pnpx supabase gen types --project-id tqdcwokxerufqfxwcjcy > database.types.ts
 ```
+
+##
+
+pnpm: https://pnpm.io/installation
+svelte kit docs:
+
+pnpm i
+pnpm run dev -- --open
+https://stonetop-beyond-pink.vercel.app/
+pnpx supabase login
+pnpx supabase gen types --project-id tqdcwokxerufqfxwcjcy > database.types.ts
+
