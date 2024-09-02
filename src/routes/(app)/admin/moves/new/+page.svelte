@@ -9,7 +9,7 @@
 	};
 	$: console.log('creating new move');
 
-	let levelRequirementEnabled: boolean = false;
+	let levelRequirementEnabled: boolean = false; 
 
 	export let data;
 	$: ({ supabase } = data);
@@ -20,7 +20,7 @@
 		if (levelRequirementEnabled) {
       createdMove.level_requirement = 6;
     } else {
-      createdMove.level_requirement = 0; // or 0, depending on your requirements
+      createdMove.level_requirement = 0;
     }
 	};
 
@@ -29,11 +29,11 @@
 	$: console.log('level req', levelRequirementEnabled);
 </script>
 
-
+<!-- TODO:  Handle Level Requirements cleaner-->
+<!-- TODO:  flush the page after a move is created (class ID hangs)-->
 
 Creating new move
 <form on:submit={create} class="flex flex-col gap-2">
-
 	<input type="text" bind:value={createdMove.name} placeholder="Name" class="text-black">
 	<MarkdownEditor {carta} bind:value={createdMove.body} mode="tabs" theme="github"/>
 	<select class="text-black" bind:value={createdMove.type}>
