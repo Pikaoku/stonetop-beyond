@@ -21,8 +21,12 @@ export function getAttributeValue(character: Character, atr: keyof Tables<'stat_
 	);
 }
 
+export const getPoolByLabel = (character: Character, poolLabel: string) => {
+	return (character?.pools ?? []).find((pool) => pool.label === poolLabel);
+};
+
 export const getPoolValue = (character: Character, poolLabel: string) => {
-	return (character?.pools ?? []).find((pool) => pool.label === poolLabel)?.value ?? 0;
+	return getPoolByLabel(character, poolLabel)?.value ?? 0;
 };
 
 export const getMaxHP = (character: Character) => {

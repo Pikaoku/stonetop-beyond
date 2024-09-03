@@ -3,7 +3,7 @@
 	export let value: number = 0;
 	export let label: string = '';
 	export let labelPosition: 'top' | 'bottom' = 'bottom';
-	export let style: 'white' | 'black' | 'red' = 'white';
+	export let style: 'white' | 'black' | 'red' | 'gold' = 'white';
 
 	const topped = labelPosition === 'top';
 </script>
@@ -15,7 +15,8 @@
 		{
 			'border-white-off text-white-off': style === 'white',
 			'border-black-off text-black-off': style === 'black',
-			'border-red-500 text-red-500': style === 'red'
+			'border-red-500 text-red-500': style === 'red',
+			'border-yellow-500 text-yellow-500': style === 'gold'
 		}
 	)}
 >
@@ -23,7 +24,7 @@
 	{#if !!label}
 		<div
 			class={cx('w-auto mx-auto px-2 uppercase', topped ? '-mt-3' : '-mb-3', {
-				'bg-black-off': style === 'white' || style === 'red',
+				'bg-black-off': style === 'white' || style === 'red' || style === 'gold',
 				'bg-white-off': style === 'black'
 			})}
 		>

@@ -9,6 +9,7 @@
 	import HpDisplay from './HpDisplay.svelte';
 	import { character as charStore } from './stores';
 	import Backpack from './Backpack.svelte';
+	import XpButton from './XpButton.svelte';
 
 	$: character = $charStore;
 	$: classMoves = (
@@ -20,9 +21,9 @@
 	<div class="flex flex-col w-full gap-3 h-full p-2">
 		<div class="flex flex-row justify-between">
 			<h3 class="text-xl">{character.name}, {character.class?.name}</h3>
-			<div>Lvl. 7</div>
+			<div>Lvl. {getPoolValue(character, 'level')}</div>
 		</div>
-		<div class="text-sm leading-tight flex flex-col gap-1">
+		<div class="text-sm leading-tight flex flex-col gap-1 font-sans">
 			<p class="italic text-white-off/80">{character.class?.description}</p>
 			<p class=""><span class="font-semibold">Appearance</span> {character.appearance}</p>
 			<p class=""><span class="font-semibold">Instinct</span> {character.instinct}</p>
@@ -32,7 +33,7 @@
 		<div class="grid grid-cols-3 gap-2">
 			<HpDisplay {character} />
 			<StatSquare value={getAttributeValue(character, 'armor')} label="armor" />
-			<StatSquare value={getPoolValue(character, 'xp')} label="xp" />
+			<XpButton />
 		</div>
 		<hr />
 		<div class="flex flex-row gap-4 my-2 text-center">
@@ -42,7 +43,7 @@
 			<Backpack />
 		</div>
 		<h3 class="text-lg underline underline-offset-8">Class moves</h3>
-		<div class="flex flex-col divide-y-2 divide-white-off/50">
+		<div class="flex flex-col divide-y-2 divide-white-off/50 font-sans">
 			{#each classMoves as move}
 				<div class="flex flex-col gap-1 py-2">
 					<div class="font-medium text-xl">{move.name}</div>
