@@ -25,7 +25,7 @@
 		await supabase
 			.from('pool')
 			.update({ value: newValue })
-			.eq('id', character.id)
+			.eq('character_id', character.id)
 			.eq('label', 'hp');
 		invalidate('app:current-character');
 		value = 0;
