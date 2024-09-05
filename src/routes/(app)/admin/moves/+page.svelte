@@ -10,6 +10,7 @@
 
 Moves
 
+<a href="/admin/moves/new" class="rounded-full text-center bg-white text-black">New + </a>
 {#each data.move as m (m.id)}
 	<a href={`/admin/moves/${m.id}`}>
 		<div class="p-2 border rounded-sm shadow bg-white/10">
@@ -20,4 +21,3 @@ Moves
 {:else}
 	<div>NO MOVES YET BOSS</div>
 {/each}
-<a href="/admin/moves/new" class="rounded-full text-center bg-white text-black">New + </a>
