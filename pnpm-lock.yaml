@@ -17,6 +17,9 @@ importers:
       '@tailwindcss/typography':
         specifier: ^0.5.15
         version: 0.5.15(tailwindcss@3.4.10(ts-node@10.9.1(@types/node@16.18.11)(typescript@5.5.4)))
+      '@tanstack/svelte-query':
+        specifier: ^5.54.2
+        version: 5.54.2(svelte@4.2.19)
       carta-md:
         specifier: ^4.4.5
         version: 4.4.5(svelte@4.2.19)
@@ -551,6 +554,14 @@ packages:
     resolution: {integrity: sha512-AqhlCXl+8grUz8uqExv5OTtgpjuVIwFTSXTrh8y9/pw6q2ek7fJ+Y8ZEVw7EB2DCcuCOtEjf9w3+J3rzts01uA==}
     peerDependencies:
       tailwindcss: '>=3.0.0 || insiders || >=4.0.0-alpha.20'
+
+  '@tanstack/query-core@5.54.1':
+    resolution: {integrity: sha512-hKS+WRpT5zBFip21pB6Jx1C0hranWQrbv5EJ7qPoiV5MYI3C8rTCqWC9DdBseiPT1JgQWh8Y55YthuYZNiw3Xw==}
+
+  '@tanstack/svelte-query@5.54.2':
+    resolution: {integrity: sha512-f/0EcXNBhJ6oIKxlWhMwKT32H+rq1grBYNg1tXbDyeFThiOsQqaAbaB3Wco+V80uuaIP9FmKv84MAf4z7+1qlg==}
+    peerDependencies:
+      svelte: ^3.54.0 || ^4.0.0 || ^5.0.0-next.0
 
   '@tootallnate/once@2.0.0':
     resolution: {integrity: sha512-XCuKFP5PS55gnMVu3dty8KPatLqUoy/ZYzDzAGCQ8JNFCkLXzmI7vNHCR+XpbZaMWQK/vQubr7PkYq8g470J/A==}
@@ -3283,6 +3294,13 @@ snapshots:
       lodash.merge: 4.6.2
       postcss-selector-parser: 6.0.10
       tailwindcss: 3.4.10(ts-node@10.9.1(@types/node@16.18.11)(typescript@5.5.4))
+
+  '@tanstack/query-core@5.54.1': {}
+
+  '@tanstack/svelte-query@5.54.2(svelte@4.2.19)':
+    dependencies:
+      '@tanstack/query-core': 5.54.1
+      svelte: 4.2.19
 
   '@tootallnate/once@2.0.0': {}
 

@@ -5,6 +5,9 @@ export default {
 	content: ['./src/**/*.{html,js,svelte,ts}', './src/libs/**/*.{html,js,svelte,ts}'],
 	theme: {
 		extend: {
+			borderWidth: {
+				'3': '3px'
+			},
 			colors: {
 				black: {
 					DEFAULT: '#000000',
@@ -13,6 +16,11 @@ export default {
 				white: {
 					DEFAULT: '#ffffff',
 					off: '#f0f0f0'
+				},
+				deco: {
+					bg: '#1e2021',
+					accent: '#4F4943',
+					light: '#E2D9A1'
 				},
 				magnum: {
 					'50': '#fff9ed',

@@ -304,6 +304,42 @@ export type Database = {
           },
         ]
       }
+      possession: {
+        Row: {
+          character_id: number
+          created_at: string
+          item_id: number
+          quantity: number
+        }
+        Insert: {
+          character_id: number
+          created_at?: string
+          item_id: number
+          quantity?: number
+        }
+        Update: {
+          character_id?: number
+          created_at?: string
+          item_id?: number
+          quantity?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "possession_character_id_fkey"
+            columns: ["character_id"]
+            isOneToOne: false
+            referencedRelation: "character"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "possession_item_id_fkey"
+            columns: ["item_id"]
+            isOneToOne: false
+            referencedRelation: "item"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       profile: {
         Row: {
           created_at: string

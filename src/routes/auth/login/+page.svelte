@@ -1,26 +1,30 @@
+<script>
+	import { page } from '$app/stores';
+	import DecoBox from '$lib/components/art-deco/DecoBox.svelte';
+	import DecoLinkLabelled from '$lib/components/art-deco/DecoLinkLabelled.svelte';
+	import DecoTextbox from '$lib/components/art-deco/DecoTextbox.svelte';
+	import DecoButton from '../../../lib/components/art-deco/DecoButton.svelte';
+</script>
+
 <svelte:head>
 	<title>Stoptop Beyond</title>
 	<meta name="description" content="Svelte demo app" />
 </svelte:head>
 
-<h1 class="text-3xl tracking-wider mx-auto font-display">Login</h1>
-<form method="POST" action="?/login">
-	<div class="flex flex-col gap-2 text-center">
-		<fieldset class="flex flex-col">
-			<label for="email">Email</label>
-			<input name="email" type="email" class="rounded-sm px-2 py-1 text-black-off" />
-		</fieldset>
-		<fieldset class="flex flex-col">
-			<label for="password">Password </label>
-			<input name="password" type="password" class="rounded-sm px-2 py-1 text-black-off" />
-		</fieldset>
-		<button
-			type="submit"
-			class="rough-button mt-4 bg-white text-black mx-auto px-8 py-1 font-semibold">Login</button
+<DecoBox>
+	<form method="POST" action="?/login" class="flex flex-col gap-2">
+		<h1 class="text-3xl mr-auto">Login</h1>
+		<DecoTextbox required name="email" type="email" placeholder="Enter email ..." />
+		<DecoTextbox required name="password" type="password" placeholder="... and password" />
+		<a href="/auth/forgot" class="text-deco-accent ml-auto text-right text-sm underline"
+			>Forgot password</a
 		>
-		<a href="/auth/create" class="mt-2">
-			No account? <span class="underline">Signup</span>
-		</a>
-		<a href="/auth/forgot" class="mt-2 underline"> Reset password </a>
-	</div>
-</form>
+		<DecoButton text="Login" type="submit" />
+	</form>
+	{#if $page.form?.errorMessage}
+		<div class="bg-red-200 text-red-500 p-1 px-2 rounded text-sm text-center w-4/5 mx-auto mt-2">
+			{$page.form?.errorMessage}
+		</div>
+	{/if}
+</DecoBox>
+<DecoLinkLabelled label="No account?" text="Sign up" to="/auth/create" class="mt-4" />

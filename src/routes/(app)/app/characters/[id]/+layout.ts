@@ -3,12 +3,10 @@ import type { LayoutLoad } from './$types';
 export const ssr = false;
 export const prerender = false;
 
-export const load: LayoutLoad = async ({ parent, params, depends }) => {
+export const load: LayoutLoad = async ({ parent, params }) => {
 	const { supabase } = await parent();
 
 	const characterId = params.id;
-
-	depends('app:current-character');
 
 	if (!characterId) {
 		return { status: 404, error: new Error('Character not found') };

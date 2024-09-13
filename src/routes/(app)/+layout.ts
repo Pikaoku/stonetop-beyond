@@ -1,4 +1,6 @@
+import { QueryClient } from '@tanstack/svelte-query';
 import type { LayoutLoad } from './$types';
+import { browser } from '$app/environment';
 
 export const load: LayoutLoad = async ({ parent }) => {
 	const { supabase, user } = await parent();
@@ -12,5 +14,14 @@ export const load: LayoutLoad = async ({ parent }) => {
 		.select('display_name,player_name,id')
 		.match({ id: user.id })
 		.single();
-	return { profile };
+
+	const queryClient = new QueryClient({
+		defaultOptions: {
+			queries: {
+				enabled: browser
+			}
+		}
+	});
+
+	return { profile, queryClient };
 };

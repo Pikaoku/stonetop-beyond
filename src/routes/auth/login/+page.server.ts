@@ -1,4 +1,4 @@
-import { redirect } from '@sveltejs/kit';
+import { redirect, fail } from '@sveltejs/kit';
 import type { Actions } from './$types';
 
 export const actions: Actions = {
@@ -9,10 +9,12 @@ export const actions: Actions = {
 
 		const { error } = await supabase.auth.signInWithPassword({ email, password });
 		if (error) {
-			console.error(error);
-			redirect(303, '/auth/error');
+			return fail(401, {
+				incorrect: true,
+				errorMessage: 'Email or password were incorrect. Try again.'
+			});
 		} else {
-			redirect(303, '/app');
+			return redirect(303, '/app');
 		}
 	}
 };
