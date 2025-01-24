@@ -37,3 +37,7 @@ export const getMaxHP = (character: Character) => {
 		return acc > atrValue ? acc : atrValue;
 	}, 0);
 };
+
+export const getPhrase = (character: Character, phraseKey: string): Tables<'phrase'> | null => {
+	return (character?.phrases ?? []).find((phrase: Tables<'phrase'>) => phrase.key === phraseKey);
+};

@@ -40,7 +40,7 @@
 
 	const {
 		elements: { trigger, menu, option, group, label, groupLabel },
-		states: { selectedLabel, open },
+		states: { selectedLabel, open, selected },
 		helpers: { isSelected }
 	} = createSelect<string>({
 		forceVisible: true,
@@ -51,6 +51,8 @@
 		}
 	});
 
+	$: console.log('selected labled', $selectedLabel, $selected);
+
 	const {
 		elements: { root, input },
 		helpers: { isChecked, isIndeterminate }
@@ -60,12 +62,14 @@
 
 	let selectedMoveType = $selectedLabel;
 
-	function setSelectedMoveType(moveType: string) {
+	$: setSelectedMoveType = (moveType: string) => {
 		selectedMoveType = moveType;
+		console.log('moveType', moveType);
+		console.log('classses', data?.classes);
 		if (typeOptions.class.includes(moveType)) {
 			createdMove.class_id = data.classes.find((c) => c.name === moveType)?.id ?? null;
 		}
-	}
+	};
 
 	$: console.log('levelrequirement', levelRequirementEnabled);
 </script>

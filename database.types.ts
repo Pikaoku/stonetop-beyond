@@ -37,29 +37,23 @@ export type Database = {
       }
       character: {
         Row: {
-          appearance: string
           class_id: number
           created_at: string
           id: number
-          instinct: string
           name: string
           owner_id: string | null
         }
         Insert: {
-          appearance?: string
           class_id: number
           created_at?: string
           id?: number
-          instinct?: string
           name?: string
           owner_id?: string | null
         }
         Update: {
-          appearance?: string
           class_id?: number
           created_at?: string
           id?: number
-          instinct?: string
           name?: string
           owner_id?: string | null
         }
@@ -119,6 +113,39 @@ export type Database = {
             columns: ["stat_line_id"]
             isOneToOne: false
             referencedRelation: "stat_line"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      charcater_phrase: {
+        Row: {
+          character_id: number | null
+          id: number
+          phrase_id: number | null
+        }
+        Insert: {
+          character_id?: number | null
+          id?: number
+          phrase_id?: number | null
+        }
+        Update: {
+          character_id?: number | null
+          id?: number
+          phrase_id?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "charcater_phrase_character_id_fkey"
+            columns: ["character_id"]
+            isOneToOne: false
+            referencedRelation: "character"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "charcater_phrase_phrase_id_fkey"
+            columns: ["phrase_id"]
+            isOneToOne: false
+            referencedRelation: "phrase"
             referencedColumns: ["id"]
           },
         ]
@@ -268,6 +295,30 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      phrase: {
+        Row: {
+          content: string
+          created_at: string
+          id: number
+          key: string
+          label: string
+        }
+        Insert: {
+          content?: string
+          created_at?: string
+          id?: number
+          key?: string
+          label?: string
+        }
+        Update: {
+          content?: string
+          created_at?: string
+          id?: number
+          key?: string
+          label?: string
+        }
+        Relationships: []
       }
       pool: {
         Row: {
@@ -432,6 +483,7 @@ export type Database = {
     }
     Enums: {
       item_size: "small" | "normal"
+      modifier_type: "BASE" | "ADD" | "MULT" | "BOOL"
       move_types:
         | "basic"
         | "value"
